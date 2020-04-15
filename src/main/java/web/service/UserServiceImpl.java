@@ -74,11 +74,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        Set<Role> roles = user.getRole();
-        for (Role role : roles) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
+        return user;
     }
 }

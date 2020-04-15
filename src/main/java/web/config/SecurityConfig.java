@@ -65,19 +65,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").access("hasRole('ROLE_user')")
                 // защищенные URL
                 .antMatchers("/admin/**").access("hasRole('ROLE_admin')").anyRequest().authenticated();
-
-//            http.authorizeRequests()
-//                .antMatchers("/cars/edit").access("hasRole('ADMIN')")
-//                .antMatchers("/hello").access("hasRole('USER')")
-//                .antMatchers( "/cars/newuser").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin()
-//                .loginPage("/login")
-//                .permitAll()
-//                .and()
-//                .logout()
-//                .permitAll();
     }
 
 //    @Bean
