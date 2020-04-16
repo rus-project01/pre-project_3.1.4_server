@@ -1,6 +1,7 @@
 package web.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -19,6 +20,7 @@ import web.config.handler.LoginSuccessHandler;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    @Qualifier("userServiceImpl")
     UserDetailsService userService;
 
     @Bean
@@ -29,7 +31,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
-//        auth.inMemoryAuthentication().withUser("ADMIN").password("ADMIN").roles("ADMIN");
     }
 
     @Override
