@@ -34,7 +34,8 @@
             border-top: 1px solid rgba(0, 0, 0, 0.3);
         }
     </style>
-    <title>Student List</title>
+
+    <title>Info List</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -50,7 +51,7 @@
         <a class="nav-link" style="position: absolute; left:0%; color:white"> [[${enter.name}]] with roles: [[${enter.role.get(0).name}]]</a>
     </ul>
 </nav>
-<div class="container mt-3" >
+<div id="results" class="container mt-3" >
     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
         <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#admins" role="tab" aria-controls="v-pills-home" aria-selected="true">Admin</a>
         <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#userss" role="tab" aria-controls="v-pills-profile" aria-selected="false">User</a>
@@ -149,9 +150,9 @@
                                                                 </div>
 
 
-                                                                <div class="col-md-6 offset-3">
+                                                                <div class="col-md-6 offset-3" >
                                                                     <strong><label class="col-md-4 control-label" for="password">Role</label></strong>
-                                                                    <select multiple class="form-control btn-sm" id="role" name="role">
+                                                                    <select multiple class="form-control btn-sm" id="role" name="role" >
                                                                         <option th:value="ROLE_admin" th:text="Admin"></option>
                                                                         <option th:value="ROLE_user" th:text="User"></option>
                                                                     </select>
@@ -311,7 +312,7 @@
                                 <div class="col-md-3 offset-5">
                                     <label class="mx-auto" for="createUsers"></label>
                                     <div class="btn-sm">
-                                        <button type="submit" class="btn btn-success btn-lg btn-sm" id="createUsers" data-target="#menu1" th:attrappend="data-target=${userk.id}">Add new user</button>
+                                        <button class="btn btn-success btn-lg btn-sm" id="createUsers" data-target="#menu1" th:attrappend="data-target=${userk.id}">Add new user</button>
                                     </div>
                                 </div>
                             </div>

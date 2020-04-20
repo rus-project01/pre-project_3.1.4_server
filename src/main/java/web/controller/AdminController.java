@@ -31,7 +31,7 @@ public class AdminController {
     private RoleService roleServiceImpl;
 
     @GetMapping(value = "/")
-    public String printCars(HttpServletRequest httpServletRequest, ModelMap model) {
+    public String printUsers(HttpServletRequest httpServletRequest, ModelMap model) {
         User users = new User();
         model.addAttribute("userk", users);
         model.addAttribute("enter", userServiceImpl.findUserByName((String)httpServletRequest.getSession().getAttribute("enterUser")));
@@ -40,16 +40,15 @@ public class AdminController {
     }
 
     @PostMapping(value = "/edit")
-    public String editCar(@ModelAttribute("listPersons") User user, ModelMap model) {
-        user.getRole().get(0).setId(user.getId());
-        roleServiceImpl.updateRole(user.getRole().get(0));
+    public String editUser(@ModelAttribute("listPersons") User user, @RequestParam("role") String roles, @RequestParam("id") Long id, ModelMap model) {
+        roleServiceImpl.updateRole(new Role(id, roles));
         userServiceImpl.updateUser(user);
         model.addAttribute("listPersons", userServiceImpl.listUsers());
         return "redirect:/admin/";
     }
 
     @PostMapping(value = "/newuser")
-    public String createUser(@ModelAttribute("listPersons") User user, @RequestParam("prava") Role prava , ModelMap model) {
+    public String createUser(@ModelAttribute("listPersons") User user, @RequestParam("prava") Role prava, ModelMap model) {
         if(userServiceImpl.checkUser(user)) {
             userServiceImpl.add(user);
             roleServiceImpl.add(prava);
