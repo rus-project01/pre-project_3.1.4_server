@@ -33,7 +33,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void add(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRole(user.getRole());
         userDao.add(user);
     }
 
@@ -41,6 +40,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public User findUserByName(String name) {
         return userDao.findUserByName(name);
+    }
+
+    @Transactional
+    @Override
+    public User findUserById(Long id) {
+        return userDao.findUserById(id);
     }
 
     @Transactional

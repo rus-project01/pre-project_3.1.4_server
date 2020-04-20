@@ -19,7 +19,7 @@ import java.util.List;
 public class LoginController {
 
     @GetMapping
-    public String loginPage() {
+    public String loginPage(HttpServletRequest request) {
         return "login";
     }
 

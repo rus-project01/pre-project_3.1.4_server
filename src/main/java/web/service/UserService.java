@@ -11,4 +11,5 @@ public interface UserService {
     void updateUser(User car);
     boolean checkUser(User user);
     void deleteUser(Long id);
+    User findUserById(Long id);
 }

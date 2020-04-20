@@ -4,13 +4,12 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import web.model.Role;
 import web.model.User;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,7 +18,7 @@ import java.util.Set;
 public class UserDaoImpl implements UserDao {
 
     @PersistenceContext
-    private EntityManager entityManager;
+    public EntityManager entityManager;
 
     @Override
     public void add(User user) {
@@ -35,9 +34,11 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateUser(User user) {
-        Query query = entityManager.createQuery("update User set age=:age, street=:street where id=:id");
+        Query query = entityManager.createQuery("update User set name=:name, age=:age, street=:street, password=:password where id=:id");
+        query.setParameter("name", user.getName());
         query.setParameter("age", user.getAge());
         query.setParameter("street", user.getStreet());
+        query.setParameter("password", user.getPassword());
         query.setParameter("id", user.getId());
         query.executeUpdate();
     }
@@ -45,8 +46,16 @@ public class UserDaoImpl implements UserDao {
     @Override
     @SuppressWarnings("unchecked")
     public List<User> listUsers() {
+        List<User> us = new ArrayList<>();
         Query query = entityManager.createQuery("select s from User s");
-        return query.getResultList();
+        List<User> user = query.getResultList();
+        for (int i = 0; i < user.size(); i++) {
+            List<Role> use = new ArrayList<>();
+            use.add(entityManager.find(Role.class, user.get(i).getId()));
+            user.get(i).setRole(use);
+            us.add(user.get(i));
+        }
+        return us;
     }
 
     @Override
@@ -55,9 +64,12 @@ public class UserDaoImpl implements UserDao {
                 .setParameter("name", name);
         Object[] obj = (Object[]) query.getResultList().get(0);
         User us = (User) obj[0];
-        Set<Role> role = new HashSet<>();
-        role.add((Role) obj[1]);
-        return new User(us.getId(), us.getName(), us.getAge(), us.getStreet(), us.getPassword(), role);
+        return new User(us.getId(), us.getName(), us.getAge(), us.getStreet(), us.getPassword(), us.getRole());
+    }
+
+    @Override
+    public User findUserById(Long id) {
+        return entityManager.find(User.class, id);
     }
 
     @Override
