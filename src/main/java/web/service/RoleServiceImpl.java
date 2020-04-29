@@ -9,6 +9,8 @@ import web.dao.UserDao;
 import web.model.Role;
 import web.model.User;
 
+import java.util.List;
+
 @Service
 public class RoleServiceImpl implements RoleService {
 
@@ -26,5 +28,11 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void updateRole(Role role) {
         roleDao.updateRole(role);
+    }
+
+    @Transactional
+    @Override
+    public List<Role> listRoles() {
+        return roleDao.listRoles();
     }
 }

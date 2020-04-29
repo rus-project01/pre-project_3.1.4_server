@@ -8,9 +8,34 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#callJs").click(function (event) {
+
+                //stop submit the form event. Do this manually using ajax post function
+                event.preventDefault();
+                ajaxPost();
+
+            };
+            function ajaxPost() {
+                var loginForm = {
+                    j_username : $("#exampleInputEmail1").val(),
+                    j_password : $("#exampleInputPassword1").val()
+                };
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: "/login",
+                    dataType: 'text',
+                    data: JSON.stringify(loginForm),
+                });
+            }
+        });
+    </script>
 </head>
 <body style="margin-top: 80px; background:#f1f1f1;">
-<form action="#" th:action="@{/login}" method="post">
+<form method="post" id="callJs">
     <div style="width: 300px; margin-left: 40%">
         <h1>Please sign in</h1>
         <div class="form-group">
