@@ -24,11 +24,6 @@ public class UsersRestController {
     @Autowired
     private RoleService roleServiceImpl;
 
-    @GetMapping(value = "/admin/getUsers")
-    public ResponseEntity<List<User>> listUsers() {
-        return new ResponseEntity<>(userServiceImpl.listUsers(), HttpStatus.OK);
-    }
-
     @PostMapping(value = "/admin/addUser")
     public ResponseEntity<Void> addUser(@RequestBody User user) {
         user.setRole(roleServiceImpl.findByName(user.getRole().get(0).getName()));
