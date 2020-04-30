@@ -28,6 +28,12 @@ public class RoleDaoImpl implements RoleDao {
         query.executeUpdate();
     }
 
+    public List<Role> findByName(String role) {
+        Query query = entityManager.createQuery("select role from Role role where role.name=:name");
+        query.setParameter("name", role);
+        return query.getResultList();
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public List<Role> listRoles() {

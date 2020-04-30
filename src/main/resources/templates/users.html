@@ -43,7 +43,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!--    <script src="templates/main.js"></script>-->
 <!--    <script type="text/javascript">-->
 <!--            // $('.buttonForDelete').click(function(we) {-->
 <!--            //     we.preventDefault();-->
@@ -334,7 +333,7 @@
                                                                 </div>
 
 
-                                                                <div class="col-md-6 offset-3" >
+                                                                <div class="form-group col-md-6 offset-3" >
                                                                     <strong><label class="col-md-4 control-label" for="role">Role</label></strong>
                                                                     <select multiple class="form-control btn-sm" id="role" name="role">
                                                                         <option th:value="ROLE_admin" th:text="Admin"></option>
@@ -412,7 +411,7 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="col-md-6 offset-3">
+                                                                <div class="form-group col-md-6 offset-3">
                                                                     <strong><label class="col-md-4 control-label" for="role_del">Role</label></strong>
                                                                     <select multiple class="form-control btn-sm" readonly="readonly" id="role_del" name="role">
                                                                         <option th:text="${users.role.get(0).name}"></option>
@@ -487,7 +486,7 @@
                                 </div>
 
 
-                                <div class="col-md-3 offset-5">
+                                <div class="form-group col-md-3 offset-5">
                                     <strong><label class="mx-auto" for="prava">Role</label></strong>
                                     <select multiple class="form-control btn-sm" id="prava" name="prava">
                                         <option th:value="ROLE_admin" th:text="Admin"></option>

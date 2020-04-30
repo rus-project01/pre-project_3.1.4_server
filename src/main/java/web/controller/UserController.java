@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@PreAuthorize("hasRole('USER')")
 @RequestMapping("/user")
 public class UserController {
 

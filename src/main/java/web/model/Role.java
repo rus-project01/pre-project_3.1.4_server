@@ -14,8 +14,7 @@ public class Role implements GrantedAuthority {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", unique = true)
-    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "name")
     private String name;
 
     public Role() {
