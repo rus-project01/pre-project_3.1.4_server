@@ -22,22 +22,7 @@ public class UsersRestController {
     private UserService userServiceImpl;
 
     @Autowired
-    private RoleService roleService;
-
-//    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<User> addUser(@RequestBody User user) {
-//        ResponseEntity<User> responseEntity = new ResponseEntity<User>(userServiceImpl.add(user), HttpStatus.OK);
-//        return null;
-//    }
-
-//    @Autowired
-//    private RoleService roleServiceImpl;
-//
-
-    @GetMapping(value = "/qweqwe")
-    public List<User> login() {
-        return userServiceImpl.listUsers();
-    }
+    private RoleService roleServiceImpl;
 
     @GetMapping(value = "/admin/getUsers")
     public ResponseEntity<List<User>> listUsers() {
@@ -46,14 +31,14 @@ public class UsersRestController {
 
     @PostMapping(value = "/admin/addUser")
     public ResponseEntity<Void> addUser(@RequestBody User user) {
+        user.setRole(roleServiceImpl.findByName(user.getRole().get(0).getName()));
         userServiceImpl.add(user);
-        roleService.add(user.getRole().get(0));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping(value = "/admin/editUser")
     public ResponseEntity<Void> editUser(@RequestBody User user) {
-        System.out.println(user.getId());
+        user.setRole(roleServiceImpl.findByName(user.getRole().get(0).getName()));
         userServiceImpl.updateUser(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
