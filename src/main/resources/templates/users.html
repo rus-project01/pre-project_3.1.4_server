@@ -188,11 +188,25 @@
                     success: function (e) {
                         console.log(delForm);
                         alert("User was deleted from database " + e);
-                        window.location.href = "/admin/";
                     },
                     error: function (e) {
                         console.log(delForm);
                         alert("Error in Delete " + e);
+                    },
+                })
+            });
+              $("#findAll").submit(function (event) {
+                event.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/getUsers",
+                    contentType: "application/json",
+                    dataType: 'text',
+                    success: function (e) {
+                        alert("Yes. Take your list users" + e);
+                    },
+                    error: function (s) {
+                        alert("Error in listAll")
                     },
                 })
             });
