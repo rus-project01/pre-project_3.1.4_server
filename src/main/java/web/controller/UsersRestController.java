@@ -26,9 +26,8 @@ public class UsersRestController {
     private RoleService roleServiceImpl;
 
     @PostMapping(value = "/admin/add")
-    public ResponseEntity<Void> addUser(@RequestBody User user) {
+    public void addUser(@RequestBody User user) {
         userServiceImpl.add(user);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping(value = "/admin/getListUsers")
@@ -37,15 +36,13 @@ public class UsersRestController {
     }
 
     @PostMapping(value = "/admin/editInUsers")
-    public ResponseEntity<Void> editUser(@RequestBody User user) {
+    public void editUser(@RequestBody User user) {
         userServiceImpl.updateUser(user);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping(value = "/admin/userDelete/{id}")
-    public ResponseEntity<Void> delUser(@PathVariable Long id)  {
+    public void delUser(@PathVariable Long id)  {
         userServiceImpl.deleteUser(id);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping(value = "/admin/userFind")
