@@ -63,4 +63,9 @@ public class UsersRestController {
         return roleServiceImpl.findRoleByNameUs(name);
     }
 
+    @PostMapping(value = "/admin/userFindToUs/")
+    public User findRole(@RequestBody User user)  {
+        return userServiceImpl.findUserByName(user.getName());
+    }
+
 }
