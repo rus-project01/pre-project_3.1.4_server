@@ -18,8 +18,6 @@ public class Role implements GrantedAuthority {
     @Column(name = "name", unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "role", fetch = FetchType.LAZY)
-    private List<User> users;
 
     public Role() {
     }
@@ -47,14 +45,6 @@ public class Role implements GrantedAuthority {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
     }
 
     @Override

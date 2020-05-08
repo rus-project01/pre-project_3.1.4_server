@@ -32,8 +32,14 @@ public class RoleServiceImpl implements RoleService {
 
     @Transactional
     @Override
-    public List<Role> findByName(String role) {
+    public Role findByName(String role) {
         return roleDao.findByName(role);
+    }
+
+    @Transactional
+    @Override
+    public Role findRoleByNameUs(String role) {
+        return roleDao.findRoleByNameUs(role);
     }
 
     @Transactional

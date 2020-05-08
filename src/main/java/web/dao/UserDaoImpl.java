@@ -9,6 +9,7 @@ import web.model.Role;
 import web.model.User;
 
 import javax.persistence.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -50,7 +51,7 @@ public class UserDaoImpl implements UserDao {
                 .setParameter("name", name);
         Object[] obj = (Object[]) query.getResultList().get(0);
         User us = (User) obj[0];
-        return new User(us.getId(), us.getName(), us.getAge(), us.getStreet(), us.getPassword(), us.getRole());
+        return new User(us.getId(), us.getName(), us.getAge(), us.getStreet(), us.getPassword());
     }
 
     @Override

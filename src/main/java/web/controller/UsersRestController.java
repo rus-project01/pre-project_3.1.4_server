@@ -1,5 +1,6 @@
 package web.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,30 +24,43 @@ public class UsersRestController {
 
     @Autowired
     private RoleService roleServiceImpl;
-    
-    @GetMapping(value = "/admin/getUsers")
-    public ResponseEntity<List<User>> listUsers() {
-        return new ResponseEntity<>(userServiceImpl.listUsers(), HttpStatus.OK);
-    }
 
-    @PostMapping(value = "/admin/addUser")
+    @PostMapping(value = "/admin/add")
     public ResponseEntity<Void> addUser(@RequestBody User user) {
-        user.setRole(roleServiceImpl.findByName(user.getRole().get(0).getName()));
         userServiceImpl.add(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping(value = "/admin/editUser")
+    @GetMapping(value = "/admin/getListUsers")
+    public List<User> listUsers() {
+        return userServiceImpl.listUsers();
+    }
+
+    @PostMapping(value = "/admin/editInUsers")
     public ResponseEntity<Void> editUser(@RequestBody User user) {
-        user.setRole(roleServiceImpl.findByName(user.getRole().get(0).getName()));
         userServiceImpl.updateUser(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping(value = "/admin/deleted")
-    public ResponseEntity<Void> delUser(@RequestBody User user)  {
-        userServiceImpl.deleteUser(user.getId());
+    @GetMapping(value = "/admin/userDelete/{id}")
+    public ResponseEntity<Void> delUser(@PathVariable Long id)  {
+        userServiceImpl.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/admin/userFind")
+    public User findUser(@RequestBody User user)  {
+        return userServiceImpl.findUserById(user.getId());
+    }
+
+    @GetMapping(value = "/admin/userFindByName/{name}")
+    public User findUserk(@PathVariable String name)  {
+        return userServiceImpl.findUserByName(name);
+    }
+
+    @GetMapping(value = "/admin/roleFindByName/{name}")
+    public Role findRole(@PathVariable String name)  {
+        return roleServiceImpl.findRoleByNameUs(name);
     }
 
 }
